@@ -21,11 +21,11 @@ async function getSubmittedWord(word){
 
   const {result} = res.data;
   if (result === 'not-word'){
-    $('.msg').text(`${word} is not a valid word`)
+    $('.wordMsg').text(`${word} is not a valid word`)
   }else if (result === 'not-on-board'){
-    $('.msg').text(`${word} is not a valid word on this board`)
+    $('.wordMsg').text(`${word} is not a valid word on this board`)
   }else {
-    $('.msg').text(`Yay! You found: ${word}`)
+    $('.wordMsg').text(`Yay! You found: ${word}`)
     score += word.length;
     $('.score').text(score)
   }
@@ -40,6 +40,7 @@ async function countDown(){
     clearInterval(timerId)
     await sendScore()
     $('#inputForm').hide()
+    $('.wordMsg').hide()
   }
 }  
 
@@ -48,13 +49,15 @@ let timerId = setInterval(countDown, 1000)
 
 async function sendScore(){
   const res = await axios.post('/post_stat', {
-    params: {
-      score: `${score}`
-    }
+      'score': score
     
   })
-  console.log('TEST')
-  console.log(res)
+  if (res.result){
+    $('.resultMsg').text(`New high score: ${score}`)
+  }else{
+    $('.resultMsg').text(`Final score: ${score}`)
+  }
+  
 }
 
 
