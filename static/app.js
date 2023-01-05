@@ -1,14 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 let score = 0;
+let time = 60;
 
-$('#submitBtn').on('click', function(e){
-  e.preventDefault();
-  const $inputValue = $('#inputVal').val();
-  getSubmittedWord($inputValue);
-  $('#inputForm').trigger('reset');
-})
 
+  
+  $('#submitBtn').on('click', function(e){
+    e.preventDefault();
+    const $inputValue = $('#inputVal').val();
+    getSubmittedWord($inputValue);
+    $('#inputForm').trigger('reset');
+  })
 
 async function getSubmittedWord(word){
   const res = await axios.get('/check_word', {
@@ -29,6 +31,20 @@ async function getSubmittedWord(word){
   }
 }
 
+
+
+
+function countDown(){
+  time --
+  $('.timer').text(time)
+  
+  if(time === 0){
+    clearInterval(timerId)
+    $('#inputForm').hide()
+  }
+}  
+
+let timerId = setInterval(countDown, 1000)
 
 
 
