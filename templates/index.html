@@ -5,9 +5,22 @@
 {% block content %}
 <h1>Boggle</h1>
 
-{% for row in board %}
-{{row}}<br>
-{% endfor %}
+<table>
+  <tbody>
+    {% for row in board %}
+    <tr>
+      {% for cell in row %}
+        <td>{{ cell }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+<p>
+  Score: <span class="score">0</span>
+</p>
 
 <form action="" method="" id="inputForm">
   <input type="text" placeholder="" name="guess" id="inputVal">

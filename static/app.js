@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+let score = 0;
 
 $('#submitBtn').on('click', function(e){
   e.preventDefault();
@@ -7,6 +8,7 @@ $('#submitBtn').on('click', function(e){
   getSubmittedWord($inputValue);
   $('#inputForm').trigger('reset');
 })
+
 
 async function getSubmittedWord(word){
   const res = await axios.get('/check_word', {
@@ -22,8 +24,11 @@ async function getSubmittedWord(word){
     $('.msg').text(`${word} is not a valid word on this board`)
   }else {
     $('.msg').text(`Yay! You found: ${word}`)
+    score += word.length;
+    $('.score').text(score)
   }
 }
+
 
 
 
