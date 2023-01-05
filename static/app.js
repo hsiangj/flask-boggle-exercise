@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 let score = 0;
-let time = 60;
+let time = 15;
 
 
   
@@ -32,20 +32,30 @@ async function getSubmittedWord(word){
 }
 
 
-
-
-function countDown(){
+async function countDown(){
   time --
   $('.timer').text(time)
   
   if(time === 0){
     clearInterval(timerId)
+    await sendScore()
     $('#inputForm').hide()
   }
 }  
 
 let timerId = setInterval(countDown, 1000)
 
+
+async function sendScore(){
+  const res = await axios.post('/post_stat', {
+    params: {
+      score: `${score}`
+    }
+    
+  })
+  console.log('TEST')
+  console.log(res)
+}
 
 
 })
