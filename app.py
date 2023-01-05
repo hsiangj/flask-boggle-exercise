@@ -30,7 +30,7 @@ def check_word():
 
 @app.route('/post_stat', methods = ['POST'])
 def post_stat():
-    """Receive score, update number of plays, and update highscore if applicable"""
+    """Receive score, update number of time played, and update highscore if applicable"""
     # data = request.get_json()
     # print(data)
     # score = data['params']['score']
