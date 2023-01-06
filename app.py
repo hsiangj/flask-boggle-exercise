@@ -10,7 +10,7 @@ app.config['SECRET_KEY'] = 'bogglesecret'
 app.debug = True
 toolbar = DebugToolbarExtension(app)
 
-boggle_game = Boggle()
+boggle_game = Boggle() ##this is boggle logic from class Boggle in boggle.py
 
 @app.route('/')
 def index():
