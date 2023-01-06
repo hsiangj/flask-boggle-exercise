@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let score = 0;
 let time = 30;
-
+let words = new Set()
 
   
   $('#submitBtn').on('click', function(e){
@@ -24,9 +24,12 @@ async function getSubmittedWord(word){
     $('.wordMsg').text(`${word} is not a valid word`)
   }else if (result === 'not-on-board'){
     $('.wordMsg').text(`${word} is not a valid word on this board`)
-  }else {
+  }else if (result === 'ok' && words.has(word)){
+    $('.wordMsg').text(`You've already found: ${word}!`)
+  }else{
     $('.wordMsg').text(`Yay! You found: ${word}`)
     score += word.length;
+    words.add(word)
     $('.score').text(score)
   }
 }
