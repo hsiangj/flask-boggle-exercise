@@ -4,10 +4,15 @@ class BoggleGame {
   constructor(time=60){
     this.time = time;
     this.score = 0;
-    this.timerId = setInterval(this.countDown, 1000)
-    $('#submitBtn').on('click', this.getSubmittedWord())
+    this.showTimer();
+    this.words = new Set();
+    this.timerId = setInterval(this.countDown.bind(this), 1000)
+    $('#submitBtn').on('click', this.getSubmittedWord.bind(this))
   }
     
+  showTimer(){
+    $('.timer').text(this.time)
+  }
 
   // Handle time countdown and update timer in DOM
   async countDown(){
@@ -50,9 +55,12 @@ class BoggleGame {
       $('.wordMsg').text(`${$inputValue} is not a valid word`)
     }else if (result === 'not-on-board'){
       $('.wordMsg').text(`${$inputValue} is not a valid word on this board`)
+    }else if((result === 'ok' && this.words.has($inputValue))){
+      $('.wordMsg').text(`You've already found: ${$inputValue}!`)
     }else {
       $('.wordMsg').text(`Yay! You found: ${$inputValue}`)
-      this.score += this.$inputValue.length;
+      this.score += $inputValue.length;
+      this.words.add($inputValue)
       $('.score').text(this.score)
     }
   
