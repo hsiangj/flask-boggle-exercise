@@ -31,9 +31,6 @@ def check_word():
 @app.route('/post_stat', methods = ['POST'])
 def post_stat():
     """Receive score, update number of time played, and update highscore if applicable"""
-    # data = request.get_json()
-    # print(data)
-    # score = data['params']['score']
     score = request.json['score']
     highscore = session.get('highscore',0)
     plays = session.get('plays',0)
