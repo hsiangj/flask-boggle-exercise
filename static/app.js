@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 let score = 0;
-let time = 15;
+let time = 30;
 
 
   
@@ -52,7 +52,7 @@ async function sendScore(){
       'score': score
     
   })
-  if (res.result){
+  if (res.data.result){
     $('.resultMsg').text(`New high score: ${score}`)
   }else{
     $('.resultMsg').text(`Final score: ${score}`)
