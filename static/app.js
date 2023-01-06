@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 let score = 0;
-let time = 30;
+let time = 60;
 let words = new Set()
 
-  
+  $('.timer').text(time)
+
   $('#submitBtn').on('click', function(e){
     e.preventDefault();
     const $inputValue = $('#inputVal').val();
